@@ -1,0 +1,7 @@
+.NavBar {
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    align-items: stretch;
+    display: flex;
+    justify-content: space-evenly;
+  }
