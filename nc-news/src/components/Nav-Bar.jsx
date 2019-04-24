@@ -8,12 +8,10 @@ class NavBar extends Component {
 
 
   state = {
-    topics: [],
-    sort_by: "date_created"
+    topics: []
   };
 
   render() {
-    console.log(this.state.sort_by)
     const { topics } = this.state;
     return (
       <div className="NavBar">
@@ -23,12 +21,7 @@ class NavBar extends Component {
             {topic.slug}
           </Link>
         ))}
-        <select id='sortby' onChange={this.handleChange}>
 
-          <option value = "date_created" > Date Created </option>
-          <option value = "comment_count" > Comment Count </option>
-          <option value = "votes" > Votes </option>
-        </select>
       </div>
     );
   }
@@ -39,20 +32,9 @@ class NavBar extends Component {
     this.fetchTopics();
   }
 
-
-handleChange = event => {
-  const { value } = event.target
- this.setState({sort_by: value}) //.then(fetchArticles())
-}
-
   fetchTopics = (sortOption) => {
     api.getTopics(sortOption).then(topics => this.setState({ topics }));
   
-  };
-
-  sortArticles = () => {
-    console.log(document.getElementById('sortby').value)
-    api.getTopics().then(topics => this.setState({ topics }));
   };
 }
 
