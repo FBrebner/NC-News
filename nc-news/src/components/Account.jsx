@@ -44,7 +44,7 @@ Welcome {username}
     event.preventDefault()
     const { username } = this.state
     api.getUser(username)
-    .then(this.props.checkUsername)
+    .then(this.props.checkUsername(username))
   }
   handleLogOut = event => {
     event.preventDefault()

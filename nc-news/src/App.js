@@ -9,7 +9,8 @@ import Article from "./components/Article";
 
 class App extends Component {
   state = {
-    loggedIn:false
+    loggedIn:false,
+    username:''
   }
   render() {
     return (
@@ -18,19 +19,20 @@ class App extends Component {
         <NavBar />
         <Router className="Router">
             <Articles path="articles/:topic" loggedIn = {this.state.loggedIn}/>
-            <Article path="articles/:topic/:article_id" />  
+            <Article path="articles/:topic/:article_id" username = {this.state.username}/>  
         </Router>
         <Account checkUsername = {this.checkUsername} loggedIn = {this.state.loggedIn} logOut = {this.logOut}/>
       </div>
     );
   }
 
-  checkUsername = () => {
-    this.setState({ loggedIn:true })
+  checkUsername = (username) => {
+    this.setState({ loggedIn:true, username: username })
+
   }
 
   logOut = () => {
-    this.setState({ loggedIn:false })
+    this.setState({ loggedIn:false, username: '' })
   }
 
 }

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "@reach/router";
 import * as api from "../api";
 import "./style/Articles.css";
+import Votes from "./Votes";
 
 class Articles extends Component {
   state = {
@@ -25,8 +26,7 @@ class Articles extends Component {
             </Link>
             Author: {article.author} <br />
             Date: {article.created_at.slice(0, 10)} <br />
-            Votes: {article.votes} <br />
-            { this.props.loggedIn ? <div> <form id={article.article_id} onSubmit={this.incVote}> <button type="submit" >+1</button></form> <button type="submit">-1</button> </div>: null }
+            <Votes article={article} loggedIn = {this.props.loggedIn} fetchArticles = {this.fetchArticles}/>
             Comment Count: {article.comment_count}
          </div>
         ))}
@@ -60,11 +60,7 @@ class Articles extends Component {
     }
   };
 
-  incVote = (event) => {
-  event.preventDefault()
-  const article_id = event.target.id
-console.log(article_id)
-  }
+
 
 }
 

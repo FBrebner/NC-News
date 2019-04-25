@@ -64,27 +64,39 @@ class Article extends Component {
         votes: -1,
         comment_id: 247
       }
-    ]
+    ],
+    comment: ''
   };
   render() {
     const { comments } = this.state;
+    const { comment } = this.state;
     return (
       <div className="Article">
         <h2>{this.state.article.title}</h2>
         <small> Author: {this.state.article.author} </small> <br />
-        <small> Date: {this.state.article.created_at.slice(0, 9)} </small>{" "}
+        <small> Date: {this.state.article.created_at.slice(0, 10)} </small>{" "}
         <br />
         {this.state.article.body}
         <br />
         <br />
         <br />
+        <form onSubmit = {this.handleSubmit}>
+        <label htmlFor="comment">Post a comment</label>
+        <textarea
+          name="comment"
+          onChange={this.handleChange}
+          value={comment}
+          id="comment"
+        />
+        <button type="submit">Post</button>
+        </form>
         {comments.map(comment => (
           <div key={comment.comment_id}>
              {comment.body}  <br />
             <small> Author: {comment.author} </small> <br />
             <small>
               {" "}
-              Date: {comment.created_at.slice(0, 9)}{" "}
+              Date: {comment.created_at.slice(0, 10)}{" "}
             </small>{" "}
             <br />
           </div>
@@ -93,9 +105,30 @@ class Article extends Component {
     );
   }
 
+  handleChange = event => {
+    const { value} = event.target;
+    this.setState({ comment: value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault()
+    const { article_id } = this.props;
+    const { comment } = this.state
+    api.postComment(this.props.username, article_id, comment)
+    .then(() => {this.fetchComments()})
+  }
+
   componentDidMount() {
     this.fetchArticle();
     this.fetchComments();
+  }
+
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.comments.length!== this.state.comments.length) {
+      console.log('here')
+      this.fetchComments()
+    }
   }
 
   fetchArticle = () => {

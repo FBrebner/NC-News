@@ -28,6 +28,21 @@ export const getTopics = async () => {
 
   export const getUser = async (username) => {
     const { data } = await axios.get(`${API_URL}/users/${username}`);
-    console.log(data.user)
     return data.user;
+  };
+
+  export const upVote = async (article_id) => {
+    const { data } = await axios.patch(`${API_URL}/articles/${article_id}`, {inc_votes: 1})
+    console.log(data.article)
+    return data.article
+  };
+
+  export const downVote = async (article_id) => {
+    const { data } = await axios.patch(`${API_URL}/articles/${article_id}`, {inc_votes: -1})
+    return data.article
+  };
+
+  export const postComment = async (username, article_id, comment) => {
+    const { data } = await axios.post(`${API_URL}/articles/${article_id}/comments`, {author: username,body: comment})
+    return data.article
   };
