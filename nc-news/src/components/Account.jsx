@@ -4,7 +4,7 @@ import "./style/Account.css";
 
 class Account extends Component {
     state = {
-        username: ''
+        username: 'jessjelly'
     }
     render() {
         const { username} = this.state

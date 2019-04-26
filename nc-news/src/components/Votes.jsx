@@ -3,25 +3,27 @@ import * as api from "../api";
 
 class Votes extends Component {
   state = {
-    article: this.props,
-    votes: this.props.article.votes
+    check: this.props.check,
+    article: this.props.article,
+    comment: this.props.comment,
+    votes: this.props[this.props.check].votes,
+    changedVote: 0
   };
   render() {
-     
-    console.log(this.state.votes);
+ const {check} = this.state
     return (
       <div>
         Votes: {this.state.votes} <br />
         {this.props.loggedIn ? (
           <div>
             {" "}
-            <form id={this.props.article.article_id} onSubmit={this.incVote}>
+            <form id={this.props[check].article_id || this.props.comment.comment_id} onSubmit={(event) => {if (check==='article') {this.changeArticleVote(event, 1)} else if (check==='comment') {this.changeCommentVote(event, 1)}}}>
               {" "}
-              <button type="submit">+1</button>
+              <button type="submit" disabled = {this.state.changedVote === 1}>+1</button>
             </form>{" "}
-            <form id={this.props.article.article_id} onSubmit={this.decVote}>
+            <form id={this.props[check].article_id || this.props.comment.comment_id} onSubmit={(event) => {if (check==='article') {this.changeArticleVote(event, -1)} else if (check==='comment') {this.changeCommentVote(event, -1)}}}>
               {" "}
-              <button type="submit">-1</button>{" "}
+              <button type="submit" disabled = {this.state.changedVote === -1}>-1</button>{" "}
             </form>{" "}
           </div>
         ) : null}
@@ -29,26 +31,28 @@ class Votes extends Component {
     );
   }
 
-  incVote = (event) => {
+  changeArticleVote = (event, inc) => {
     event.preventDefault();
-    const article_id = event.target.id;
-    api.upVote(article_id)
-        this.setState(prevState => {
-            return {
-              votes: prevState.votes + 1
-            };
-          });
+    const id = event.target.id;
+    console.log(id)
+      api.patchArticleVote(id, inc)
+      this.setState(prevState => {
+          return {
+            votes: prevState.votes + inc,
+            changedVote: this.state.changedVote + inc
+          };
+        });
   };
 
-  decVote = event => {
+  changeCommentVote = (event, inc) => {
     event.preventDefault();
-    const article_id = event.target.id;
-    api.downVote(article_id)
-        this.setState(prevState => {
-            return {
-              votes: prevState.votes - 1
-            };
-          });
+    const id = event.target.id;
+      api.patchCommentVote(id, inc)
+      this.setState(prevState => {
+          return {
+            votes: prevState.votes + inc
+          };
+        });
   };
 }
 

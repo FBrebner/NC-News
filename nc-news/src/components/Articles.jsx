@@ -26,7 +26,7 @@ class Articles extends Component {
             </Link>
             Author: {article.author} <br />
             Date: {article.created_at.slice(0, 10)} <br />
-            <Votes article={article} loggedIn = {this.props.loggedIn} fetchArticles = {this.fetchArticles}/>
+            <Votes article={article} loggedIn = {this.props.loggedIn} fetchArticles = {this.fetchArticles} check = {'article'}/>
             Comment Count: {article.comment_count}
          </div>
         ))}

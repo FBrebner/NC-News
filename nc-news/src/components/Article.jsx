@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import Votes from "./Votes";
 import "./style/Article.css";
 
 class Article extends Component {
@@ -99,6 +100,12 @@ class Article extends Component {
               Date: {comment.created_at.slice(0, 10)}{" "}
             </small>{" "}
             <br />
+            {this.props.username === comment.author ? (
+            <form id={comment.comment_id} onSubmit = {this.handleDelete}>
+              <button type="submit" >Delete</button>{" "}
+            </form>
+              ) : null}
+            <Votes comment={comment} loggedIn = {this.props.loggedIn} fetchComments = {this.fetchComments} check = {'comment'}/>
           </div>
         ))}
       </div>
@@ -114,7 +121,18 @@ class Article extends Component {
     event.preventDefault()
     const { article_id } = this.props;
     const { comment } = this.state
+    if (comment.length>0) {
     api.postComment(this.props.username, article_id, comment)
+    .then(() => {this.fetchComments()})
+    } else {
+
+    }
+  }
+
+  handleDelete = event => {
+    event.preventDefault()
+    const id = event.target.id;
+    api.deleteComment(id)
     .then(() => {this.fetchComments()})
   }
 

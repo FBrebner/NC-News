@@ -31,18 +31,23 @@ export const getTopics = async () => {
     return data.user;
   };
 
-  export const upVote = async (article_id) => {
-    const { data } = await axios.patch(`${API_URL}/articles/${article_id}`, {inc_votes: 1})
+  export const patchArticleVote = async (article_id, inc) => {
+    const { data } = await axios.patch(`${API_URL}/articles/${article_id}`, {inc_votes: inc})
     console.log(data.article)
     return data.article
   };
 
-  export const downVote = async (article_id) => {
-    const { data } = await axios.patch(`${API_URL}/articles/${article_id}`, {inc_votes: -1})
-    return data.article
+  export const patchCommentVote = async (comment_id, inc) => {
+    const { data } = await axios.patch(`${API_URL}/comments/${comment_id}`, {inc_votes: inc})
+    return data.comment
   };
 
   export const postComment = async (username, article_id, comment) => {
     const { data } = await axios.post(`${API_URL}/articles/${article_id}/comments`, {author: username,body: comment})
+    return data.article
+  };
+
+  export const deleteComment = async (comment_id) => {
+    const { data } = await axios.delete(`${API_URL}/comments/${comment_id}`)
     return data.article
   };

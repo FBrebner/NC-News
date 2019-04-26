@@ -19,7 +19,7 @@ class App extends Component {
         <NavBar />
         <Router className="Router">
             <Articles path="articles/:topic" loggedIn = {this.state.loggedIn}/>
-            <Article path="articles/:topic/:article_id" username = {this.state.username}/>  
+            <Article path="articles/:topic/:article_id" username = {this.state.username} loggedIn = {this.state.loggedIn}/>  
         </Router>
         <Account checkUsername = {this.checkUsername} loggedIn = {this.state.loggedIn} logOut = {this.logOut}/>
       </div>
