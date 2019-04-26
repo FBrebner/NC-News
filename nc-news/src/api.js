@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { navigate } from '@reach/router'
 const API_URL = 'https://frasers-nc-news.herokuapp.com/api';
 
 export const getTopics = async () => {
@@ -13,6 +14,7 @@ export const getTopics = async () => {
 
   export const getArticlesByTopic = async (topic, sortBy) => {
     const { data } = await axios.get(`${API_URL}/articles?topic=${topic}&sort_by=${sortBy}`);
+    if (data.articles.length===0){navigate('/error', {replace: true})}
     return data.articles;
   };
 
@@ -33,7 +35,6 @@ export const getTopics = async () => {
 
   export const patchArticleVote = async (article_id, inc) => {
     const { data } = await axios.patch(`${API_URL}/articles/${article_id}`, {inc_votes: inc})
-    console.log(data.article)
     return data.article
   };
 

@@ -34,7 +34,6 @@ class Votes extends Component {
   changeArticleVote = (event, inc) => {
     event.preventDefault();
     const id = event.target.id;
-    console.log(id)
       api.patchArticleVote(id, inc)
       this.setState(prevState => {
           return {
@@ -50,7 +49,8 @@ class Votes extends Component {
       api.patchCommentVote(id, inc)
       this.setState(prevState => {
           return {
-            votes: prevState.votes + inc
+            votes: prevState.votes + inc,
+            changedVote: this.state.changedVote + inc
           };
         });
   };

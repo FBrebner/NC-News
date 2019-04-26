@@ -4,7 +4,8 @@ import "./style/Account.css";
 
 class Account extends Component {
     state = {
-        username: 'jessjelly'
+        username: 'jessjelly',
+        attempt: false
     }
     render() {
         const { username} = this.state
@@ -30,6 +31,9 @@ Welcome {username}
         />
         <button type="submit">Log-in</button>
       </form>
+      {this.state.attempt ? (
+          <div> Incorrect username, please try again</div>
+           ) : null}
     </div>
   );
 }
@@ -44,12 +48,13 @@ Welcome {username}
     event.preventDefault()
     const { username } = this.state
     api.getUser(username)
-    .then(this.props.checkUsername(username))
+    .then(user => this.props.checkUsername(user))
+    .catch(() => this.setState({attempt : true}));
   }
   handleLogOut = event => {
     event.preventDefault()
     this.props.logOut()
-    this.setState({username : ''})
+    this.setState({username : '', attempt: false})
   }
 };
 

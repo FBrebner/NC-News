@@ -6,6 +6,7 @@ import Articles from "./components/Articles";
 import Account from "./components/Account";
 import { Router } from "@reach/router";
 import Article from "./components/Article";
+import Error from "./components/Error";
 
 class App extends Component {
   state = {
@@ -20,15 +21,15 @@ class App extends Component {
         <Router className="Router">
             <Articles path="articles/:topic" loggedIn = {this.state.loggedIn}/>
             <Article path="articles/:topic/:article_id" username = {this.state.username} loggedIn = {this.state.loggedIn}/>  
+            <Error path="/error" default/>
         </Router>
         <Account checkUsername = {this.checkUsername} loggedIn = {this.state.loggedIn} logOut = {this.logOut}/>
       </div>
     );
   }
 
-  checkUsername = (username) => {
-    this.setState({ loggedIn:true, username: username })
-
+  checkUsername = (user) => {
+    this.setState({ loggedIn:true, username: user.username })
   }
 
   logOut = () => {

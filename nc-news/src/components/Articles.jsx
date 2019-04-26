@@ -3,6 +3,7 @@ import { Link } from "@reach/router";
 import * as api from "../api";
 import "./style/Articles.css";
 import Votes from "./Votes";
+import { navigate } from '@reach/router'
 
 class Articles extends Component {
   state = {
@@ -52,12 +53,16 @@ class Articles extends Component {
   fetchArticles = () => {
     const { topic } = this.props;
     if (topic === "all") {
-      api.getArticles(this.state.sort_by).then(articles => this.setState({ articles }));
+      api.getArticles(this.state.sort_by).then(articles => this.setState({ articles }))
+      .catch(err => {
+        navigate('/error', {replace: true});
+      });
     } else {
       api
         .getArticlesByTopic(topic, this.state.sort_by)
-        .then(articles => this.setState({ articles }));
+        .then(articles => this.setState({ articles }))
     }
+    
   };
 
 
