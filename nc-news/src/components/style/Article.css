@@ -2,3 +2,15 @@
     grid-column: 1 / 4;
     grid-row: 3 / 4;
   }
+
+  .Article small {
+    color: #4b5f82;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+  }
+
+  .Article div {
+    color: #4b5f82;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+  }

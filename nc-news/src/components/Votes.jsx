@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./style/Votes.css";
 import * as api from "../api";
 
 class Votes extends Component {
@@ -13,18 +14,15 @@ class Votes extends Component {
  const {check} = this.state
     return (
       <div>
-        Votes: {this.state.votes} <br />
+        Votes: {this.state.votes}
         {this.props.loggedIn ? (
           <div>
-            {" "}
-            <form id={this.props[check].article_id || this.props.comment.comment_id} onSubmit={(event) => {if (check==='article') {this.changeArticleVote(event, 1)} else if (check==='comment') {this.changeCommentVote(event, 1)}}}>
-              {" "}
+            <form id={this.props[check].article_id || this.props.comment.comment_id} onSubmit={(event) => {if (check==='article') {this.changeArticleVote(event, 1)} else if (check==='comment') {this.changeCommentVote(event, 1)}}}>  
               <button type="submit" disabled = {this.state.changedVote === 1}>+1</button>
-            </form>{" "}
+            </form>
             <form id={this.props[check].article_id || this.props.comment.comment_id} onSubmit={(event) => {if (check==='article') {this.changeArticleVote(event, -1)} else if (check==='comment') {this.changeCommentVote(event, -1)}}}>
-              {" "}
-              <button type="submit" disabled = {this.state.changedVote === -1}>-1</button>{" "}
-            </form>{" "}
+              <button type="submit" disabled = {this.state.changedVote === -1}>-1</button>
+            </form>
           </div>
         ) : null}
       </div>

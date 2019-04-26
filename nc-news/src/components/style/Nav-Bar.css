@@ -4,4 +4,15 @@
     align-items: stretch;
     display: flex;
     justify-content: space-evenly;
+    background-color: #505763;
+  }
+
+  .NavBar a {
+    color: white;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+  }
+
+  .NavBar a:hover{
+    color: #c2c3c4;
   }

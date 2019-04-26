@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import "./style/Comments.css";
 import Votes from "./Votes";
 
 class Comments extends Component {
@@ -27,7 +28,7 @@ class Comments extends Component {
             </form>
              ) : null}
             {comments.map(comment => (
-              <div key={comment.comment_id}>
+              <span key={comment.comment_id}>
                 {comment.body} <br />
                 <small> Author: {comment.author} </small> <br />
                 <small> Date: {comment.created_at.slice(0, 10)} </small> <br />
@@ -42,7 +43,7 @@ class Comments extends Component {
                   fetchComments={this.fetchComments}
                   check={"comment"}
                 />
-              </div>
+              </span> 
             ))}
           </div>
         ) : null}

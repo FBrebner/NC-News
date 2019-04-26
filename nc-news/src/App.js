@@ -4,9 +4,12 @@ import Header from "./components/Header";
 import NavBar from "./components/Nav-Bar";
 import Articles from "./components/Articles";
 import Account from "./components/Account";
+import Welcome from "./components/Welcome";
 import { Router } from "@reach/router";
 import Article from "./components/Article";
 import Error from "./components/Error";
+
+
 
 class App extends Component {
   state = {
@@ -15,10 +18,15 @@ class App extends Component {
   }
   render() {
     return (
+      
       <div className="App">
+      <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+</style>
         <Header />
         <NavBar />
         <Router className="Router">
+            <Welcome path="/"/>
             <Articles path="articles/:topic" loggedIn = {this.state.loggedIn}/>
             <Article path="articles/:topic/:article_id" username = {this.state.username} loggedIn = {this.state.loggedIn}/>  
             <Error path="/error" default/>

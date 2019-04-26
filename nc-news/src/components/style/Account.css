@@ -1,4 +1,28 @@
 .Account {
     grid-column: 3 / 4;
     grid-row: 1/ 2;
+    color: #4b5f82;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+  }
+
+  .Account input{
+
+    color: #4b5f82;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+  }
+
+  .Account button{
+
+    color: #4b5f82;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+  }
+
+  .Account Welcome{
+
+    color: #4b5f82;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
   }

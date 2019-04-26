@@ -4,3 +4,32 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
+  .Articles a {
+    color: #4b5f82;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+  }
+
+  .Articles span {
+    background-color: #d6d7d8;
+    border-style: solid;
+    border-color:black;
+    border-radius: 25px;
+    margin: 2%;
+  padding: 5px;
+  color: #4b5f82;
+    font-family: 'Roboto Slab', serif;
+    text-decoration: none;
+  }
+
+  .Articles select{
+ width: 50%;
+ color: #4b5f82;
+ font-family: 'Roboto Slab', serif;
+ text-decoration: none;
+  }
+
+  .Articles div:hover{
+    background-color: #c2c3c4;
+  }

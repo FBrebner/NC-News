@@ -21,7 +21,7 @@ class Articles extends Component {
         </select>
         <h2> </h2>
         {articles.map(article => (
-          <div key={article.article_id}>
+          <span key={article.article_id}>
           <Link  to={`/articles/${article.topic}/${article.article_id}`}>
             <h3> {article.title} </h3> 
             </Link>
@@ -29,7 +29,7 @@ class Articles extends Component {
             Date: {article.created_at.slice(0, 10)} <br />
             <Votes article={article} loggedIn = {this.props.loggedIn} fetchArticles = {this.fetchArticles} check = {'article'}/>
             Comment Count: {article.comment_count}
-         </div>
+         </span>
         ))}
       </div>
     );
