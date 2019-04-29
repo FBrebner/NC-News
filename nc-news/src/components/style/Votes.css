@@ -1,5 +1,11 @@
-.Votes div{
-    background-color: red;
-    color: red;
-    float: right
+.Votes {
+    display:flex;
 }
+
+.Votes button{
+    float:left;
+}
+
+.Votes form{
+    display: inline-block
+  }

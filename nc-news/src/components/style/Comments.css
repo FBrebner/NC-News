@@ -7,3 +7,19 @@
   .Comments span:hover{
     background-color: #c2c3c4;
   }
+
+  .rejection span{
+    color:red;
+  }
+
+  .delete{
+    float:right
+  }
+
+  .post {
+    background-color: #c9ced6;
+  }
+
+ .td {
+  border-radius: 25px;
+ }

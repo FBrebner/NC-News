@@ -14,3 +14,11 @@
     font-family: 'Roboto Slab', serif;
     text-decoration: none;
   }
+
+  .Article tr {
+   background-color: #c9ced6;
+  }
+
+  tr:nth-child(even) {
+    background-color: #eee
+  }

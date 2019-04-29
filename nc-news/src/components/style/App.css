@@ -6,6 +6,10 @@
   grid-template-rows: 2fr 1fr 12fr;
 }
 
+.App button:hover{
+  cursor:pointer
+}
+
 .Router {
   grid-column: 1 / 4;
   grid-row: 3 / 4;

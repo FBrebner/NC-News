@@ -11,7 +11,7 @@ class Account extends Component {
         const { username} = this.state
          if (this.props.loggedIn) {
              return (
-<div className="Welcome">
+<div className="Account">
 Welcome {username}
 <form onSubmit={this.handleLogOut}>
     <button type="submit">Log-out</button>
@@ -54,7 +54,7 @@ Welcome {username}
   handleLogOut = event => {
     event.preventDefault()
     this.props.logOut()
-    this.setState({username : '', attempt: false})
+    this.setState({username : 'jessjelly', attempt: false})
   }
 };
 

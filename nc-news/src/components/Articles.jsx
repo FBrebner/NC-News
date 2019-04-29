@@ -8,18 +8,22 @@ import { navigate } from '@reach/router'
 class Articles extends Component {
   state = {
     articles: [],
-    sort_by: "date_created"
+    sort_by: "date_created",
+    order: 'asc'
   };
   render() {
     const { articles } = this.state;
     return (
       <div className="Articles">
         <select id="sortby" onChange={this.handleChange}>
-          <option value="date_created"> Date Created </option>
-          <option value="comment_count"> Comment Count </option>
-          <option value="votes"> Votes </option>
+          <option value="date_created" > Date Created</option>
+          <option value="comment_count" > Comment Count </option>
+          <option value="votes" > Votes </option>
         </select>
-        <h2> </h2>
+        <select id="order" onChange={this.handleOrderChange}>
+          <option value="asc" > Ascending</option>
+          <option value="desc" > Descending </option>
+        </select>
         {articles.map(article => (
           <span key={article.article_id}>
           <Link  to={`/articles/${article.topic}/${article.article_id}`}>
@@ -40,26 +44,33 @@ class Articles extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.topic !== this.props.topic || prevState.sort_by!== this.state.sort_by) {
+    if (prevProps.topic !== this.props.topic || prevState.sort_by!== this.state.sort_by || prevState.order!== this.state.order) {
       this.fetchArticles();
     }
   }
 
   handleChange = event => {
-    const { value } = event.target
+    const { value} = event.target
    this.setState({sort_by: value})
+  }
+
+  handleOrderChange = event => {
+    const {value } = event.target
+    console.log(value)
+   this.setState({order: value})
   }
 
   fetchArticles = () => {
     const { topic } = this.props;
+    const {sort_by, order} = this.state
     if (topic === "all") {
-      api.getArticles(this.state.sort_by).then(articles => this.setState({ articles }))
+      api.getArticles(sort_by, order).then(articles => this.setState({ articles }))
       .catch(err => {
         navigate('/error', {replace: true});
       });
     } else {
       api
-        .getArticlesByTopic(topic, this.state.sort_by)
+        .getArticlesByTopic(topic, sort_by, order)
         .then(articles => this.setState({ articles }))
     }
     

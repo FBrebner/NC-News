@@ -7,13 +7,13 @@ export const getTopics = async () => {
     return data.topics;
   };
 
-  export const getArticles = async (sortBy) => {
-    const { data } = await axios.get(`${API_URL}/articles?sort_by=${sortBy}`);
+  export const getArticles = async (sortBy, order) => {
+    const { data } = await axios.get(`${API_URL}/articles?sort_by=${sortBy}&order=${order}`);
     return data.articles;
   };
 
-  export const getArticlesByTopic = async (topic, sortBy) => {
-    const { data } = await axios.get(`${API_URL}/articles?topic=${topic}&sort_by=${sortBy}`);
+  export const getArticlesByTopic = async (topic, sortBy, order) => {
+    const { data } = await axios.get(`${API_URL}/articles?topic=${topic}&sort_by=${sortBy}&order=${order}`);
     if (data.articles.length===0){navigate('/error', {replace: true})}
     return data.articles;
   };

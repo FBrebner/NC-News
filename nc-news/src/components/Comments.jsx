@@ -6,7 +6,8 @@ import Votes from "./Votes";
 class Comments extends Component {
   state = {
       comments: [],
-    comment: ""
+    comment: "",
+    attempt: false
   };
   render() {
     const { comments } = this.state;
@@ -14,8 +15,7 @@ class Comments extends Component {
     return (
       <div className="Comments">
         {comments ? (
-          <div>
-              {this.props.loggedIn ? (
+          <div className = 'post'>
             <form onSubmit={this.handleSubmit}>
               <label htmlFor="comment">Post a comment</label>
               <textarea
@@ -24,17 +24,20 @@ class Comments extends Component {
                 value={comment}
                 id="comment"
               />
-              <button type="submit">Post</button>
+              <button disabled = {!this.props.loggedIn} type="submit">Post</button>
+             {this.state.attempt ? (
+              <div className = 'rejection'> <span>Please enter text to post a comment</span> </div>
+        ): null
+             }
             </form>
-             ) : null}
             {comments.map(comment => (
-              <span key={comment.comment_id}>
-                {comment.body} <br />
+              <tr key={comment.comment_id}>
+                <td> {comment.body} <br />
                 <small> Author: {comment.author} </small> <br />
                 <small> Date: {comment.created_at.slice(0, 10)} </small> <br />
                 {this.props.username === comment.author ? (
                   <form id={comment.comment_id} onSubmit={this.handleDelete}>
-                    <button type="submit">Delete</button>{" "}
+                    <button className = "delete" type="submit">Delete</button>{" "}
                   </form>
                 ) : null}
                 <Votes
@@ -42,8 +45,8 @@ class Comments extends Component {
                   loggedIn={this.props.loggedIn}
                   fetchComments={this.fetchComments}
                   check={"comment"}
-                />
-              </span> 
+                /> </td>
+              </tr> 
             ))}
           </div>
         ) : null}
@@ -52,8 +55,8 @@ class Comments extends Component {
   }
 
   handleChange = event => {
-    const { value } = event.target;
-    this.setState({ comment: value });
+    const { value} = event.target;
+    this.setState({ comment: value});
   };
 
   componentDidMount() {
@@ -77,8 +80,12 @@ class Comments extends Component {
     const { comment } = this.state;
     if (comment.length > 0) {
       api.postComment(this.props.username, article_id, comment).then(() => {
-        this.fetchComments();
-      });
+        this.fetchComments()
+      }).then(() => {
+        this.setState({comment: '', attempt:false})
+      })
+    } else {
+      this.setState({attempt: true})
     }
   };
 

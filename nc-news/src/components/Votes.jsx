@@ -13,7 +13,7 @@ class Votes extends Component {
   render() {
  const {check} = this.state
     return (
-      <div>
+      <div className = "Votes">
         Votes: {this.state.votes}
         {this.props.loggedIn ? (
           <div>

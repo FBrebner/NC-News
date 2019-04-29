@@ -22,7 +22,9 @@ class Article extends Component {
         <br />
         <br />
         <br />
+        <span>
         <Comments article_id={this.state.article.article_id} loggedIn = {this.props.loggedIn} username = {this.props.username}/>
+        </span>
         </div>
         ) : null}
       </div>

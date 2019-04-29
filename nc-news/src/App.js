@@ -25,7 +25,7 @@ class App extends Component {
 </style>
         <Header />
         <NavBar />
-        <Router className="Router">
+        <Router primary={false} className="Router">
             <Welcome path="/"/>
             <Articles path="articles/:topic" loggedIn = {this.state.loggedIn}/>
             <Article path="articles/:topic/:article_id" username = {this.state.username} loggedIn = {this.state.loggedIn}/>  
@@ -41,7 +41,7 @@ class App extends Component {
   }
 
   logOut = () => {
-    this.setState({ loggedIn:false, username: '' })
+    this.setState({ loggedIn:false })
   }
 
 }
